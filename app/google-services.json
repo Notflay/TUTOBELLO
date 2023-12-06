@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "835626856035",
+    "firebase_url": "https://adopme-ecc38-default-rtdb.firebaseio.com",
+    "project_id": "adopme-ecc38",
+    "storage_bucket": "adopme-ecc38.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:835626856035:android:8d5388776f1731a0421256",
+        "android_client_info": {
+          "package_name": "com.example.adopmekotlin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "835626856035-nopkgu5pqe958v17a67pas4ljkfsig2h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0SrXZFXXIzJulJ3dGK6-0JWZqRnFDmGU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "835626856035-nopkgu5pqe958v17a67pas4ljkfsig2h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
