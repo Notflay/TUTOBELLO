@@ -25,7 +25,7 @@ import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.UUID
-
+/* Cambio del mas kchero */
 class CreatePostActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCreatePostBinding
@@ -51,6 +51,7 @@ class CreatePostActivity : AppCompatActivity() {
                     Toast.makeText(this, ImagePicker.getError(result.data), Toast.LENGTH_SHORT)
                         .show()
                 }
+
                 else -> {
                     Toast.makeText(this, "Se canceló la operación", Toast.LENGTH_SHORT).show()
                 }
