@@ -25,7 +25,11 @@ import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.UUID
-/* Cambio del mas kchero */
+
+/* Cambio del mas kchero SANCHEZ  */
+
+//dfkajdlkfjlk
+
 class CreatePostActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCreatePostBinding
