@@ -143,6 +143,25 @@ class MainActivity : AppCompatActivity() {
         usersReference.child(auth.currentUser!!.uid).get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
+                    val result = task.result
+                    if (result != null && result.exists()) {
+                        Log.d(TAG, "Retrieving user data: success")
+                        user = result.getValue(User::class.java)!!
+                        updateUserInfo()
+                    } else {
+                        Log.w(TAG, "User data does not exist")
+                        // Manejar la situación donde no hay datos para el usuario
+                    }
+                } else {
+                    Log.w(TAG, "Retrieving user data: failure", task.exception)
+                    // Manejar la falla de la tarea si es necesario
+                }
+            }
+
+        /*
+        usersReference.child(auth.currentUser!!.uid).get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
                     Log.d(TAG, "Retrieving user data: success")
                     user = task.result.getValue(User::class.java)!!
                     updateUserInfo()
@@ -150,7 +169,7 @@ class MainActivity : AppCompatActivity() {
                     Log.w(TAG, "Retrieving user data: failure")
                 }
             }
-
+        */
         getPosts { posts ->
             posts?.let {
                 postCardAdapter.setItems(posts.toMutableList())
