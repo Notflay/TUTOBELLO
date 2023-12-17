@@ -177,7 +177,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun navigateToMain() {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, MapActivity::class.java)
         startActivity(intent)
         finish()
     }
