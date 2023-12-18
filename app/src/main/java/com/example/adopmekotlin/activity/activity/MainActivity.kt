@@ -22,6 +22,10 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 
 class MainActivity : AppCompatActivity() {
@@ -79,11 +83,20 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.swipeRefreshLayout.setOnRefreshListener {
-            getPosts { posts ->
-                posts?.let {
-                    postCardAdapter.setItems(posts.toMutableList())
+            CoroutineScope(Dispatchers.Main).launch {
+                try {
+                    //Traemos los GetPosts()
+                    val posts = getPosts()
+                    //Si el Post noe s Nulo
+                    posts?.let {
+                        //Asignamos el Nuevo Post al PostCardAdapter
+                        postCardAdapter.setItems(posts.toMutableList())
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                } finally {
+                    binding.swipeRefreshLayout.isRefreshing = false
                 }
-                binding.swipeRefreshLayout.isRefreshing = false
             }
         }
 
@@ -155,27 +168,38 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-        getPosts { posts ->
-            posts?.let {
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                user = getUserData()
+                updateUserInfo()
+
+                val posts = getPosts()
                 postCardAdapter.setItems(posts.toMutableList())
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }
 
-    private fun getPosts(cb: (posts: List<Post>?) -> Unit) {
-        postsReference.orderByChild("createdAt").limitToLast(10).get()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Log.d(TAG, "Retrieving posts data: success")
-                    val posts = task.result.children
-                        .map { it.getValue(Post::class.java)!! }
-                        .reversed()
-                    cb(posts)
-                } else {
-                    Log.w(TAG, "Retrieving posts data: failure", task.exception)
-                    cb(null)
-                }
-            }
+    private suspend fun getPosts(): List<Post> {
+        return try {
+            postsReference.orderByChild("createdAt").limitToLast(10).get().await()
+                .children
+                .map { it.getValue(Post::class.java)!! }
+                .reversed()
+        } catch (e: Exception) {
+            Log.e(TAG, "Error al obtener publicaciones", e)
+            emptyList()
+        }
+    }
+
+    private suspend fun getUserData(): User {
+        return try {
+            usersReference.child(auth.currentUser!!.uid).get().await().getValue(User::class.java)!!
+        } catch (e: Exception) {
+            Log.e(TAG, "Error al obtener datos del usuario", e)
+            User()
+        }
     }
 
     private fun updateUserInfo() {
