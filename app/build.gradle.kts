@@ -47,11 +47,8 @@ dependencies {
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-storage-ktx")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.5.20")
-   // implementation("org.jetbrains.kotlin:kotlin-parcelize")
     implementation("com.squareup.picasso:picasso:2.71828")
-/*
-    implementation('com.google.firebase:firebase-database-ktx')
-    implementation('com.google.firebase:firebase-storage-ktx')*/
+    implementation("androidx.core:core-ktx:1.9.0")
     implementation("com.github.Dhaval2404:ImagePicker:2.1")
     implementation("com.google.firebase:firebase-auth:22.3.0")
     implementation("com.google.firebase:firebase-firestore-ktx")
@@ -62,7 +59,7 @@ dependencies {
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation("com.google.android.gms:play-services-auth:20.7.0")
     testImplementation("junit:junit:4.13.2")
-     androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
 
